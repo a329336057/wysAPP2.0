@@ -1,7 +1,5 @@
-package com.winhex.wys.wys;
+package com.winhex.wys.wys.Activity;
 
-import android.app.Activity;
-import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import java.sql.Time;
+import com.winhex.wys.wys.R;
+import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 
 public class APPstar extends AppCompatActivity {
 
@@ -49,6 +48,7 @@ public class APPstar extends AppCompatActivity {
                 zhuce.setVisibility(View.VISIBLE);
             }
         },time);
+        SharedPreferencesUtil.getData("token","没有token,获取失败");
     }
     public void register(View v){
 

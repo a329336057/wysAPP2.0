@@ -1,7 +1,9 @@
-package com.winhex.wys.wys;
+package com.winhex.wys.wys.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.winhex.wys.wys.R;
 
 public class MainActivity extends AppCompatActivity {
 

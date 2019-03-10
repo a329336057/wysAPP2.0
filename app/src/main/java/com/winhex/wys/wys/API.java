@@ -11,5 +11,8 @@ import rx.Observable;
 public interface API {
 
     @GET("dr/login")
-    Observable<Loginbean> getlogin(@Query("usernmae")String username, @Query("password")String password);
+    Observable<Loginbean> getlogin(@Query("username")String username, @Query("password")String password);
+
+    
+    
 }
