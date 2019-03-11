@@ -9,18 +9,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.winhex.wys.wys.Presenter.Login.LoginImpl;
+import com.winhex.wys.wys.Presenter.Start.StartPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
+import com.winhex.wys.wys.Utils.ToastUtils;
+import com.winhex.wys.wys.View.Istartview;
+import com.winhex.wys.wys.bean.Startokenbean;
 
-public class APPstar extends AppCompatActivity {
+public class APPstar extends AppCompatActivity implements Istartview {
 
     Button login,zhuce;
-
+    StartPresenterImpl startPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-
+        startPresenter=new StartPresenterImpl(this);
         setContentView(R.layout.activity_appstar);
         View decorView = getWindow().getDecorView();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
@@ -43,12 +48,15 @@ public class APPstar extends AppCompatActivity {
 //                Intent intent=new Intent(APPstar.this,MainActivity.class);
 //                startActivity(intent);
 //                APPstar.this.finish();
-
+                SharedPreferencesUtil.getInstance(APPstar.this,"tokens");
+                String token=(String) SharedPreferencesUtil.getData("token","获取失败");
+                startPresenter.startApp("http://192.168.0.8:8080/wys/",token);
                 login.setVisibility(View.VISIBLE);
-                zhuce.setVisibility(View.VISIBLE);
+                zhuce.setVisibility(View.VISIBLE);  
             }
         },time);
-        SharedPreferencesUtil.getData("token","没有token,获取失败");
+       
+        
     }
     public void register(View v){
 
@@ -58,5 +66,19 @@ public class APPstar extends AppCompatActivity {
         startActivity(intent);
         APPstar.this.finish();
     }
+
+    @Override
+    public void getDataFailed(Throwable e) {
+        e.getMessage();
     }
+
+    @Override
+    public void getStartSuccess(Startokenbean startokenbean) {
+       if(startokenbean.isToken()){
+           ToastUtils.show(APPstar.this,startokenbean.getMessage());
+       }else {
+           ToastUtils.show(APPstar.this,startokenbean.getMessage());
+       }
+    }
+}
 
