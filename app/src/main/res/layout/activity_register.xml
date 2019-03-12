@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".Activity.Register"
+android:orientation="vertical"
+
+    android:layout_weight="1">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:orientation="horizontal"
+      >
+  <com.hjq.bar.TitleBar
+      android:id="@+id/Registerbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#03BAE6"
+      app:barStyle="transparent"
+      app:leftTitle="返回"
+      app:rightTitle=""
+      app:title="注册" />
+</LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="55dp"
+      android:layout_marginLeft="29dp"
+      android:layout_marginRight="29dp"
+      android:orientation="vertical">
+    <EditText
+        android:id="@+id/Register_User"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/register_fillet"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text=""
+        android:minLines="1"
+        android:hint="请输入注册账号 可英文加数字"
+        android:lines="1"
+        android:textColorHint="#838383"
+        android:autoLink="none"
+        android:textSize="13sp"
+        android:maxLength="10"/>
+    <EditText
+        android:id="@+id/Register_PasswordOne"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/register_fillet"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+
+        android:minLines="1"
+        android:hint="请输入密码"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:textColorHint="#838383"
+        android:autoLink="none"
+        android:textSize="13sp"
+        android:maxLength="10"/>
+    <EditText
+        android:textSize="13sp"
+        android:id="@+id/Register_PasswordTow"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/register_fillet"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+
+        android:minLines="1"
+        android:hint="请再输入一次"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:textColorHint="#838383"
+        android:autoLink="none"
+        android:maxLength="10"/>
+    <RadioButton
+        android:id="@+id/user_service"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="已阅读并同意《用户服务协议》"
+        android:textColor="#03BAE6"
+        android:buttonTint="#03BAE6"/>
+    <Button
+
+        android:layout_marginTop="26dp"
+        android:id="@+id/register_button"
+        android:background="@drawable/registration_button"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp" />
+  </LinearLayout>
+
+</LinearLayout>

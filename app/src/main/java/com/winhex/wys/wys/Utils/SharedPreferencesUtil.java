@@ -36,6 +36,11 @@ public class SharedPreferencesUtil {
         }
     }
 
+    public static  void Remove(String key){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.commit();
+    }
     /**
      * 保存数据到SharedPreferences
      *
