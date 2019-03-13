@@ -18,6 +18,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.winhex.wys.wys.Presenter.Register.IregisterPresenter;
+import com.winhex.wys.wys.Presenter.Register.RegisterPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
@@ -36,7 +37,8 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
     ImageView mHeightSelector,mSexSelctor,mBirthdaySelector;
     TextView mHeight, mSex,mBirthday,mPhone,mNickname;
     Button perfect_data;
-    IregisterPresenter iregisterPresenter;
+    RegisterPresenterImpl registerPresenter;
+    Iregisterview iregisterview;
     List<String> height=new ArrayList<>();//身高
     List<String> sex=new ArrayList<>();//性别
     String username;//登录或注册传递过来的username;
@@ -50,17 +52,29 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
         perfect_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                registerPresenter=new RegisterPresenterImpl(iregisterview);
                 if(mNickname.getText().length()>0 &&mBirthday.getText().length()>0&&mHeight.getText().length()>0
-                &&mPhone.getText().length()>0&&mSex.getText().length()>0&&!mHeight.getText().toString().equals("请选择身高")
-                &&!mBirthday.getText().toString().equals("请选择生日")&&!mSex.getText().toString().equals("选择性别")){
-                      if(!username.equals(null)&&!username.equals("")){
-                        iregisterPresenter.geinformation(UrlIPconfig.GONGSIIP,mSex.getText().toString(),
-                                mBirthday.getText().toString(),mHeight.getText().toString(),mPhone.getText().toString(),username);
+                &&mPhone.getText().length()>0&&mSex.getText().length()>0){
+                   
+                    if(!mHeight.getText().toString().equals("请选择身高")
+                            &&!mBirthday.getText().toString().equals("请选择生日")&&!mSex.getText().toString().equals("选择性别")){
+                        ToastUtils.show(UserData.this,"啊 啊");
+
+                        if(!username.equals(null)&&!username.equals("")){
+                            String msex=mSex.getText().toString();
+                            String mbirthday=mBirthday.getText().toString();
+                            String mheight=mHeight.getText().toString();
+                            String mphone=mPhone.getText().toString();
+                            int a=3;
+                            registerPresenter.geinformation(UrlIPconfig.GONGSIIP,msex,
+                                    mbirthday,mheight,mphone,username);
+                        }
+
+                    }else {
+                        ToastUtils.show(UserData.this,"啊 你不填写啊");
+                    }
                     }
                     
-                }else {
-                    ToastUtils.show(UserData.this,"啊 你不填写啊");
-                }
             }
         });
     }
