@@ -22,6 +22,6 @@ public interface API {
     Observable<Startokenbean>ValidationToken(@Header("token") String token);
 
     @GET("dr/information")
-    Observable<Registerbean>geinformation(@Query("gender") String gender,@Query("gender") String Birthday,@Query("gender") String height,@Query("gender") String phone);
+    Observable<Registerbean>geinformation(@Query("gender") String gender,@Query("gender") String Birthday,@Query("gender") String height,@Query("gender") String phone,String id);
 
 }

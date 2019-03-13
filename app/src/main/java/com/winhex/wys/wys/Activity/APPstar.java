@@ -39,7 +39,7 @@ public class APPstar extends AppCompatActivity implements Istartview {
 
         handler.postDelayed(new Runnable() {
             @Override
-            public void run() {
+            public void run() { 
 //                Intent intent=new Intent(APPstar.this,MainActivity.class);
 //                startActivity(intent);
 //                APPstar.this.finish();

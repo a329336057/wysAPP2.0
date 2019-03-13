@@ -76,7 +76,8 @@
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
         <Button
             android:background="@drawable/registration_button"
             android:textColor="#ffffff"
@@ -90,8 +91,8 @@
             android:background="@drawable/registration_button"
             android:textColor="#ffffff"
             android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="317dp"
+            android:layout_height="40dp"
             android:id="@+id/register_loginbutton"
             android:text="注册"/>
 

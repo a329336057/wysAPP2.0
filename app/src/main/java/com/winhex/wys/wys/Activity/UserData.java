@@ -1,5 +1,6 @@
 package com.winhex.wys.wys.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.bigkoo.pickerview.view.TimePickerView;
 import com.winhex.wys.wys.Presenter.Register.IregisterPresenter;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.ToastUtils;
+import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.Iregisterview;
 import com.winhex.wys.wys.bean.Registerbean;
 
@@ -37,6 +39,8 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
     IregisterPresenter iregisterPresenter;
     List<String> height=new ArrayList<>();//身高
     List<String> sex=new ArrayList<>();//性别
+    String username;//登录或注册传递过来的username;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +50,16 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
         perfect_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHeight.equals(null) &&mBirthday.equals(null)&&mNickname.equals(null)&&mPhone.equals(null)&&mSex.equals(null)){
-                    ToastUtils.show(UserData.this,"请填写完整信息");
+                if(mNickname.getText().length()>0 &&mBirthday.getText().length()>0&&mHeight.getText().length()>0
+                &&mPhone.getText().length()>0&&mSex.getText().length()>0&&!mHeight.getText().toString().equals("请选择身高")
+                &&!mBirthday.getText().toString().equals("请选择生日")&&!mSex.getText().toString().equals("选择性别")){
+                      if(!username.equals(null)&&!username.equals("")){
+                        iregisterPresenter.geinformation(UrlIPconfig.GONGSIIP,mSex.getText().toString(),
+                                mBirthday.getText().toString(),mHeight.getText().toString(),mPhone.getText().toString(),username);
+                    }
+                    
                 }else {
-
+                    ToastUtils.show(UserData.this,"啊 你不填写啊");
                 }
             }
         });
@@ -123,6 +133,11 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
         return format.format(date);
     }
     private void findid() {
+        
+        //获取username
+      
+        intent=getIntent();
+        username=intent.getStringExtra("user");
         perfect_data=findViewById(R.id.perfect_data);
         mHeightSelector=findViewById(R.id.height_selector);
         mSexSelctor=findViewById(R.id.sex_selector);
@@ -137,11 +152,16 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
 
     @Override
     public void getDataFailed(Throwable e) {
-
+        ToastUtils.show(UserData.this,e.getMessage());
     }
 
     @Override
     public void getDataSuccess(Registerbean registerbean) {
-
+          if(registerbean.getCode()==200){
+              ToastUtils.show(UserData.this,registerbean.getMessage());
+          }
+          if(registerbean.getCode()==400){
+              ToastUtils.show(UserData.this,registerbean.getMessage());
+          }
     }
 }

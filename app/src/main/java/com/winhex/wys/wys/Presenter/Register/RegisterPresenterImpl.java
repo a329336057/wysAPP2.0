@@ -41,8 +41,8 @@ public class RegisterPresenterImpl implements IregisterPresenter{
     }
 
     @Override
-    public void geinformation(String baseUrl, String gender, String Birthday, String height, String phone) {
-        registerMode.geinformation(baseUrl, gender, Birthday,height,phone)
+    public void geinformation(String baseUrl, String gender, String Birthday, String height, String phone,String id) {
+        registerMode.geinformation(baseUrl, gender, Birthday,height,phone,id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .subscribe(new Subscriber<Registerbean>() {

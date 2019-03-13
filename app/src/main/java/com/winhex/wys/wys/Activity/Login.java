@@ -71,14 +71,19 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
 
     @Override
     public void getDataSuccess(Loginbean loginbean) {
+        //判断接口中的token是否存在
         if(loginbean.getToken()!=null){
+            //将接口中的token写入
             SharedPreferencesUtil.putData("token",loginbean.getToken());
-            SharedPreferencesUtil.getInstance(Login.this,"tokens");
-            SharedPreferencesUtil.putData("token",loginbean.getToken()) ;
+          
           if(loginbean.getIsPerfectinformation().equals("0")){
+            
+              
               Intent intent=new Intent(Login.this,UserData.class);
+              intent.putExtra("user",username.getText().toString());
               startActivity(intent);
               Login.this.finish();
+              
           }else {
               Intent intent=new Intent(Login.this,MainActivity.class);
               startActivity(intent);

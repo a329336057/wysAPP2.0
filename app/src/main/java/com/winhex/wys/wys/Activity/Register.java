@@ -76,7 +76,10 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
     public void getDataSuccess(Registerbean registerbean) {
             if(registerbean.getCode()==200){
                 ToastUtils.show(Register.this,"注册成功");
-                Intent intent=new Intent(Register.this,Login.class);
+                Bundle  bundle=new Bundle();
+                bundle.putString("user",mUserEdite.getText().toString());
+                Intent intent=new Intent(Register.this,UserData.class);
+                intent.putExtra("user",mUserEdite.getText().toString());
                 startActivity(intent);
                 Register.this.finish();
             }else {
