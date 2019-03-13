@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
             SharedPreferencesUtil.putData("token",loginbean.getToken());
             SharedPreferencesUtil.getInstance(Login.this,"tokens");
             SharedPreferencesUtil.putData("token",loginbean.getToken()) ;
-          if(loginbean.getIsPerfectinformation()=="0"){
+          if(loginbean.getIsPerfectinformation().equals("0")){
               Intent intent=new Intent(Login.this,UserData.class);
               startActivity(intent);
               Login.this.finish();

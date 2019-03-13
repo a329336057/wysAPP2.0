@@ -9,4 +9,5 @@ import rx.Observable;
 public interface IstartModel {
    
     Observable<Startokenbean> getValidationToken(String baseUrl, String token);
+
 }

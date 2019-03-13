@@ -20,6 +20,8 @@ public interface API {
     
     @GET("dr/tokencheck")
     Observable<Startokenbean>ValidationToken(@Header("token") String token);
-    
-    
+
+    @GET("dr/information")
+    Observable<Registerbean>geinformation(@Query("gender") String gender,@Query("gender") String Birthday,@Query("gender") String height,@Query("gender") String phone);
+
 }
