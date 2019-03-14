@@ -38,31 +38,9 @@ public class RegisterPresenterImpl implements IregisterPresenter{
                     }
 
                 });
-    }
-
-    @Override
-    public void geinformation(String baseUrl, String gender, String Birthday, String height, String phone,String id) {
-        registerMode.geinformation(baseUrl, gender, Birthday,height,phone,id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .subscribe(new Subscriber<Registerbean>() {
-                    @Override
-                    public void onCompleted() {
 
 
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        view.getDataFailed(e);
-                    }
-
-                    @Override
-                    public void onNext(Registerbean registerbean) {
-                        view.getDataSuccess(registerbean);
-                    }
-
-                });
     }
 }
 

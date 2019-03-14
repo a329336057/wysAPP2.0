@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.Login">
+    tools:context=".LoginSystemActivity.Login">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:orientation="horizontal"
         >
         <com.hjq.bar.TitleBar
+            app:backButton="false"
             android:id="@+id/loginbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#03BAE6"
             app:barStyle="transparent"
-            app:leftTitle="返回"
+            app:leftTitle=""
             app:rightTitle=""
             app:title="登陆" />
     </LinearLayout>

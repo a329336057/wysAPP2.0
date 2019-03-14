@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.LoginSystemActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
+import com.winhex.wys.wys.Activity.MainActivity;
+import com.winhex.wys.wys.Utils.SingleClick;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.Iloginview;
 import com.winhex.wys.wys.Presenter.Login.LoginImpl;
@@ -36,10 +38,14 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
         register=findViewById(R.id.register_loginbutton);
         userlogin();
         register();
+        Intent intent =getIntent();
+
+
         mTitleBar.setOnTitleBarListener(this);
     }
     void  register(){
         register.setOnClickListener(new View.OnClickListener() {
+            @SingleClick
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Login.this,Register.class);
@@ -50,6 +56,7 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
     }
     void userlogin(){
         login.setOnClickListener(new View.OnClickListener() {
+            @SingleClick
             @Override
             public void onClick(View v) {
                 if(username.getText().toString().length()>1 && password.getText().toString().length()>1){
@@ -88,6 +95,7 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
               Intent intent=new Intent(Login.this,MainActivity.class);
               startActivity(intent);
               Login.this.finish();
+              ToastUtils.show(Login.this,"欢迎您 伙伴");
           }
         }else {
             ToastUtils.show(Login.this,loginbean.getMessage());

@@ -12,6 +12,10 @@ import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,12 +32,14 @@ public class BasisTimesUtils {
     public static int THEME_HOLO_DARK = AlertDialog.THEME_HOLO_DARK;
     private static DatePickerDialog mDatePickerDialog;//日期选择器
 
+
+
+
     /**
      * 将字符串时间转为Long时间
      *
      * @param time yyyy-MM-dd HH:mm:ss:SSS
      */
-
     public static Long getLongTimeOfSSS(String time) {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");

@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.LoginSystemActivity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -6,10 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
-import com.winhex.wys.wys.Presenter.Login.LoginImpl;
+import com.winhex.wys.wys.Activity.MainActivity;
 import com.winhex.wys.wys.Presenter.Start.StartPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.SharedPreferencesUtil;

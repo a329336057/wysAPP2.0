@@ -27,8 +27,5 @@ public class RegisterMode implements  IRegisterModel{
         return RetrofitFactory.getInstance().getCustomHaierAPi(baseUrl).getregister(username,password);
     }
 
-    @Override
-    public Observable<Registerbean> geinformation(String baseUrl, String gender, String Birthday, String height, String phone,String id) {
-        return RetrofitFactory.getInstance().getCustomHaierAPi(baseUrl).geinformation(gender,Birthday,height,phone,id);
-    }
+
 }

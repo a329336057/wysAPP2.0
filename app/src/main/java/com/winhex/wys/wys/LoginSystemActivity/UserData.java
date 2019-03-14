@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.LoginSystemActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -17,28 +16,25 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.winhex.wys.wys.Presenter.Register.IregisterPresenter;
-import com.winhex.wys.wys.Presenter.Register.RegisterPresenterImpl;
+import com.winhex.wys.wys.Presenter.Infromation.InformationPersenterImpl;
 import com.winhex.wys.wys.R;
+import com.winhex.wys.wys.Utils.SingleClick;
 import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
-import com.winhex.wys.wys.View.Iregisterview;
-import com.winhex.wys.wys.bean.Registerbean;
-
-import org.w3c.dom.Text;
+import com.winhex.wys.wys.View.IInformationview;
+import com.winhex.wys.wys.bean.Informationbean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class UserData extends AppCompatActivity implements  Iregisterview {
+public class UserData extends AppCompatActivity implements IInformationview {
     ImageView mHeightSelector,mSexSelctor,mBirthdaySelector;
     TextView mHeight, mSex,mBirthday,mPhone,mNickname;
     Button perfect_data;
-    RegisterPresenterImpl registerPresenter;
-    Iregisterview iregisterview;
+    InformationPersenterImpl informationPersenter;
+
     List<String> height=new ArrayList<>();//身高
     List<String> sex=new ArrayList<>();//性别
     String username;//登录或注册传递过来的username;
@@ -46,29 +42,32 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        informationPersenter=new InformationPersenterImpl(this);
         setContentView(R.layout.activity_user_data);
         findid();
         selector();
         perfect_data.setOnClickListener(new View.OnClickListener() {
             @Override
+            @SingleClick
             public void onClick(View v) {
-                registerPresenter=new RegisterPresenterImpl(iregisterview);
+
                 if(mNickname.getText().length()>0 &&mBirthday.getText().length()>0&&mHeight.getText().length()>0
                 &&mPhone.getText().length()>0&&mSex.getText().length()>0){
                    
                     if(!mHeight.getText().toString().equals("请选择身高")
                             &&!mBirthday.getText().toString().equals("请选择生日")&&!mSex.getText().toString().equals("选择性别")){
-                        ToastUtils.show(UserData.this,"啊 啊");
 
-                        if(!username.equals(null)&&!username.equals("")){
+
+
+                            String nickname=mNickname.getText().toString();
                             String msex=mSex.getText().toString();
                             String mbirthday=mBirthday.getText().toString();
                             String mheight=mHeight.getText().toString();
                             String mphone=mPhone.getText().toString();
                             int a=3;
-                            registerPresenter.geinformation(UrlIPconfig.GONGSIIP,msex,
+                            informationPersenter.geinformation(UrlIPconfig.GONGSIIP,nickname,msex,
                                     mbirthday,mheight,mphone,username);
-                        }
+
 
                     }else {
                         ToastUtils.show(UserData.this,"啊 你不填写啊");
@@ -82,6 +81,7 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
     private void selector() {
         mHeightSelector.setOnClickListener(new View.OnClickListener() {
             @Override
+            @SingleClick
             public void onClick(View v) {
 
 
@@ -105,6 +105,7 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
         });
         mSexSelctor.setOnClickListener(new View.OnClickListener() {
             @Override
+            @SingleClick
             public void onClick(View v) {
                 sex.clear();
                 sex= com.winhex.wys.wys.Date.sex();
@@ -170,12 +171,23 @@ public class UserData extends AppCompatActivity implements  Iregisterview {
     }
 
     @Override
-    public void getDataSuccess(Registerbean registerbean) {
-          if(registerbean.getCode()==200){
-              ToastUtils.show(UserData.this,registerbean.getMessage());
+    public void getDataSuccess(Informationbean informationbean) {
+          if(informationbean.getCode()==200){
+
+              intent =new Intent(UserData.this,Login.class);
+
+              startActivity(intent);
+              UserData.this.finish();
+              ToastUtils.show(UserData.this,informationbean.getMessage());
           }
-          if(registerbean.getCode()==400){
-              ToastUtils.show(UserData.this,registerbean.getMessage());
+          if(informationbean.getCode()==400){
+              ToastUtils.show(UserData.this,informationbean.getMessage());
           }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(UserData.this,Login.class);
+        startActivity(intent);
+        UserData.this.finish();
     }
 }

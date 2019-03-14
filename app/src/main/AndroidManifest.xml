@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CommonAppTheme">
-        <activity android:name=".Activity.APPstar">
+        <activity android:name=".LoginSystemActivity.APPstar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.Login" />
-        <activity android:name=".Activity.UserData" />
-        <activity android:name=".Activity.Register"></activity>
+        <activity android:name=".LoginSystemActivity.Login" />
+        <activity android:name=".LoginSystemActivity.UserData" />
+        <activity android:name=".LoginSystemActivity.Register"></activity>
     </application>
 
 </manifest>

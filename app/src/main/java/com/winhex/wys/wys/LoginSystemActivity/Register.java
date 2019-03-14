@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.LoginSystemActivity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.winhex.wys.wys.Presenter.Register.RegisterPresenterImpl;
 import com.winhex.wys.wys.R;
+import com.winhex.wys.wys.Utils.SingleClick;
 import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.Iregisterview;
@@ -32,8 +33,8 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
         registerPresenter=new RegisterPresenterImpl(this);
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            @SingleClick
             public void onClick(View v) {
-
                 String username=mUserEdite.getText().toString();
                 String mpasswordone=mPassWordEditeOne.getText().toString();
                 String mpasswordtow=mPassWordEditeTow.getText().toString();
@@ -46,8 +47,6 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
                 }else {
                     ToastUtils.show(Register.this,"注册或密码不能为空");
                 }
-
-
             }
         });
 
@@ -69,13 +68,14 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
      */
     @Override
     public void getDataFailed(Throwable e) {
+
         e.getMessage();
     }
 
     @Override
     public void getDataSuccess(Registerbean registerbean) {
             if(registerbean.getCode()==200){
-                ToastUtils.show(Register.this,"注册成功");
+
                 Bundle  bundle=new Bundle();
                 bundle.putString("user",mUserEdite.getText().toString());
                 Intent intent=new Intent(Register.this,UserData.class);
@@ -83,6 +83,7 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
                 startActivity(intent);
                 Register.this.finish();
             }else {
+
                 ToastUtils.show(Register.this,registerbean.getMessage());
             }
     }
@@ -91,6 +92,7 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
      * @param v
      */
     @Override
+    @SingleClick
     public void onLeftClick(View v) {
         Intent intent=new Intent(Register.this,Login.class);
         startActivity(intent);
