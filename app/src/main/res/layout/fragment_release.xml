@@ -4,11 +4,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.fragment.ReleaseFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拍照"
+            android:id="@+id/select_images"/>
+        <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单选照片"
+            android:id="@+id/sgin"/>
+        <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多选"
+            android:id="@+id/Multiselect"/>
+        <ImageView
+
+            android:layout_margin="20dp"
+            android:scaleType="center"
+            android:layout_width="80dp"
+            android:id="@+id/images"
+            android:layout_height="80dp"
+            />
+        <TextView
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="null"
+            />
+    </LinearLayout>
+
 
 </FrameLayout>

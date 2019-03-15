@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.winhex.wys.wys">
 
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 写入SD卡的权限：如果你希望保存相机拍照后的照片 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,7 +27,8 @@
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".LoginSystemActivity.Login" />
         <activity android:name=".LoginSystemActivity.UserData" />
-        <activity android:name=".LoginSystemActivity.Register"></activity>
+        <activity android:name=".LoginSystemActivity.Register" />
+        <activity android:name=".Activity.testimages"></activity>
     </application>
 
 </manifest>

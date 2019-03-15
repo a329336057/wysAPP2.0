@@ -7,7 +7,7 @@ import com.winhex.wys.wys.bean.Registerbean;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
-public class RegisterPresenterImpl implements IregisterPresenter{
+public class    RegisterPresenterImpl implements IregisterPresenter{
     private RegisterMode registerMode;
         private Iregisterview view;
 

@@ -1,5 +1,10 @@
 package com.winhex.wys.wys.Utils;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 
 public class XClickUtil {
@@ -31,4 +36,5 @@ public class XClickUtil {
             return false;
         }
     }
+
 }

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,10 +29,12 @@ import com.winhex.wys.wys.Utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity  {
 
-     long mExitTime =0;
+    long mExitTime =0;
     ViewPager mviewPager;
+    FragmentManager fragmentManager;
     BottomNavigationView mbottomNavigationMenuView;
     MainActivityViewPagerAdapter mmainActivityViewPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,11 @@ public class MainActivity extends AppCompatActivity  {
         mmainActivityViewPagerAdapter.addFragment(new ReleaseFragment());
         mmainActivityViewPagerAdapter.addFragment(new MyFragment());
         mviewPager.setAdapter(mmainActivityViewPagerAdapter);
+
+//        fragmentTransaction=fragmentManager.beginTransaction();
+//        fragmentTransaction.add()
+
+
         mbottomNavigationMenuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -114,5 +124,13 @@ public class MainActivity extends AppCompatActivity  {
         }
         return super.onKeyDown(keyCode, event);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mmainActivityViewPagerAdapter.getItem(1).onActivityResult(requestCode, resultCode, data);
+    }
+
+
+
 }
 
