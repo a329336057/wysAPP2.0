@@ -3,6 +3,7 @@ package com.winhex.wys.wys.LoginSystemActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
     LoginImpl presenter;
     Button login,register;
     TitleBar mTitleBar;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +40,10 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
         register=findViewById(R.id.register_loginbutton);
         userlogin();
         register();
-        Intent intent =getIntent();
-
-
         mTitleBar.setOnTitleBarListener(this);
+        
     }
-    void  register(){
+        void  register(){
         register.setOnClickListener(new View.OnClickListener() {
             @SingleClick
             @Override
@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity implements Iloginview ,OnTitleBarLi
             @SingleClick
             @Override
             public void onClick(View v) {
-                if(username.getText().toString().length()>1 && password.getText().toString().length()>1){
+                if(!TextUtils.isEmpty(username.getText().toString()) && !TextUtils.isEmpty(password.getText().toString())){
                     presenter.login(UrlIPconfig.GONGSIIP,username.getText().toString(),password.getText().toString());
                 }else {
                     ToastUtils.show(Login.this,"账号或密码不能为空");

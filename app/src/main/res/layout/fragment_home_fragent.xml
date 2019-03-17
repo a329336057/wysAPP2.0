@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_height="match_parent"
+    
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:scrollbars="vertical"
+    android:fadingEdge="vertical"
+    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.fragment.HomeFragent">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.fragment.HomeFragent"
+    android:orientation="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <com.hjq.bar.TitleBar
+            android:id="@+id/Registerbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#03BAE6"
+            app:barStyle="transparent"
+            app:leftTitle="返回"
+            app:rightTitle="发布"
+            app:title="首页" />
+        <com.youth.banner.Banner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="185dp" />
 
-</FrameLayout>
+            <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:background="@drawable/sendwordbackgroud"
+                android:layout_height="105dp" 
+                android:orientation="horizontal"
+               >
+                
+       
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="17日"
+                    android:textSize="20dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:textColor="#ffffff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="努力吧，请珍惜人生最宝贵的青春的时光，去实现你远大崇高的理想。只盯着个人的利益与得失，只追求吃喝与享乐的理想，那是猪栏式的理想;只有将自己的才华与社会的需要、国家乃至人类的利益集合起来。"
+                    android:layout_weight="6"
+                    android:textColor="#ffffff"
+                    android:padding="5dp"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"/>
+            </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:background="#DFDFDF" /> 
+        <android.support.v7.widget.RecyclerView
+       
+            android:layout_width="match_parent"
+            android:layout_height="297dp"
+            android:id="@+id/lateral"/>
+
+            
+    </LinearLayout>
+
+
+  
+
+
+</LinearLayout>
+</ScrollView>

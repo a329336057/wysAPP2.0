@@ -3,6 +3,7 @@ package com.winhex.wys.wys.LoginSystemActivity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class Register extends AppCompatActivity implements OnTitleBarListener,Ir
                 String username=mUserEdite.getText().toString();
                 String mpasswordone=mPassWordEditeOne.getText().toString();
                 String mpasswordtow=mPassWordEditeTow.getText().toString();
-                if(username.length()>1 && mpasswordone.length()>1 && mpasswordtow.length()>1){
+                if(!TextUtils.isEmpty(mUserEdite.getText().toString()) && !TextUtils.isEmpty(mpasswordone) && !TextUtils.isEmpty(mpasswordtow)){
                     if(mpasswordone.equals(mpasswordtow)){
                     registerPresenter.register(UrlIPconfig.GONGSIIP,username,mpasswordone);
                     }else {

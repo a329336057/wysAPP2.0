@@ -26,14 +26,12 @@ import com.bumptech.glide.Glide;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.winhex.wys.wys.Activity.Selectphotos;
 import com.winhex.wys.wys.R;
-import com.yuyh.library.imgsel.ISNav;
-import com.yuyh.library.imgsel.common.ImageLoader;
-import com.yuyh.library.imgsel.config.ISCameraConfig;
-import com.yuyh.library.imgsel.config.ISListConfig;
 
 
-import java.io.File;
+
+
 import java.util.List;
 
 
@@ -49,75 +47,28 @@ public class ReleaseFragment extends Fragment {
     TextView mImage_url;
     Button  msgin;
     Button mMultiselect;
+    Selectphotos selectphotos=new Selectphotos();
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        
         View v=inflater.inflate(R.layout.fragment_release, container, false);
         findid(v);
-// 自定义图片加载器
-        ISNav.getInstance().init(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, String path, ImageView imageView) {
-                Glide.with(context).load(path).into(imageView);
-            }
-        });
-
-        mSelect_images.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ISCameraConfig config = new ISCameraConfig.Builder()
-                        .needCrop(true) // 裁剪
-                        .cropSize(1, 1, 200, 200)
-                        .build();
-
-
-                ISNav.getInstance().toCameraActivity(getActivity(), config, REQUEST_CAMERA_CODE);
-            }
-        });
         msgin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mImage_url.setText("");
-                ISListConfig config = new ISListConfig.Builder()
-                        // 是否多选
-                        .multiSelect(false)
-                        .btnText("Confirm")
-                        // 确定按钮背景色
-                        //.btnBgColor(Color.parseColor(""))
-                        // 确定按钮文字颜色
-                        .btnTextColor(Color.WHITE)
-                        // 使用沉浸式状态栏
-                        .statusBarColor(Color.parseColor("#3F51B5"))
-                        // 返回图标ResId
-                        .backResId(R.mipmap.back)
-                        .title("Images")
-                        .titleColor(Color.WHITE)
-                        .titleBgColor(Color.parseColor("#3F51B5"))
-                        .allImagesText("All Images")
-                        .needCrop(true)
-                        .cropSize(1, 1, 200, 200)
-                        // 第一个是否显示相机
-                        .needCamera(true)
-                        // 最大选择图片数量
-                        .maxNum(9)
-                        .build();
-
-                ISNav.getInstance().toListActivity(getActivity(), config, REQUEST_LIST_CODE);
+                selectphotos.camera(getActivity(),REQUEST_CAMERA_CODE);
             }
         });
-
+        mSelect_images.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectphotos.selectimage(getActivity(),mImage_url,REQUEST_LIST_CODE);
+            }
+        });
         mMultiselect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mImage_url.setText("");
-                ISListConfig config = new ISListConfig.Builder()
-                        .multiSelect(true)
-                        // 是否记住上次选中记录
-                        .rememberSelected(false)
-                        // 使用沉浸式状态栏
-                        .statusBarColor(Color.parseColor("#3F51B5")).build();
-
-                ISNav.getInstance().toListActivity(getActivity(), config, REQUEST_LIST_CODE);
+                selectphotos.multiSelect(getActivity(),mImage_url,REQUEST_LIST_CODE);
             }
         });
         return v;
@@ -125,7 +76,7 @@ public class ReleaseFragment extends Fragment {
 
     }
 
-
+ 
 
 
 
@@ -133,6 +84,7 @@ public class ReleaseFragment extends Fragment {
         mSelect_images=v.findViewById(R.id.select_images);
         mImage_url=v.findViewById(R.id.image_url);
         msgin=v.findViewById(R.id.sgin);
+        mimages=v.findViewById(R.id.images);
         mMultiselect=v.findViewById(R.id.Multiselect);
     }
 
@@ -152,9 +104,9 @@ public class ReleaseFragment extends Fragment {
         } else if (requestCode == REQUEST_CAMERA_CODE && resultCode == RESULT_OK && data != null) {
             String path = data.getStringExtra("result");
             mImage_url.append(path + "\n");
-
+            Glide.with(getActivity()).load(path).into(mimages);
         }
-    }
+    }   
 
 
 }
