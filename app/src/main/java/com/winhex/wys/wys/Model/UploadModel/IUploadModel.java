@@ -9,5 +9,5 @@ import retrofit2.http.Multipart;
 import rx.Observable;
 
 public interface IUploadModel {
-    Observable<Uploadbean> getUpload(String url, List<MultipartBody.Part> part);
+    Observable<Uploadbean> getUpload(String url, List<MultipartBody.Part> part,String token,String type,String text);
 }

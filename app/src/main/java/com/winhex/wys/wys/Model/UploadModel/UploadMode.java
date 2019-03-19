@@ -22,7 +22,7 @@ public class UploadMode implements IUploadModel {
         return instance;
     }
     @Override
-    public Observable<Uploadbean> getUpload(String url, List<MultipartBody.Part>part) {
-        return RetrofitFactory.getInstance().getCustomHaierAPi(url).getUpload(part);
+    public Observable<Uploadbean> getUpload(String url, List<MultipartBody.Part>part,String token,String type,String text) {
+        return RetrofitFactory.getInstance().getCustomHaierAPi(url).getUpload(part,token,text,type);
     }
 }

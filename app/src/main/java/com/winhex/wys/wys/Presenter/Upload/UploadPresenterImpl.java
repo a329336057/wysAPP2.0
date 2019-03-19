@@ -19,8 +19,8 @@ public class UploadPresenterImpl implements IUploadPresenter {
         this.view=view;
     }
     @Override
-    public void geinformation(String baseUrl, List<MultipartBody.Part> parts) {
-        uploadMode.getUpload(baseUrl, parts)
+    public void getUpload(String baseUrl, List<MultipartBody.Part> parts,String token,String type,String text) {
+        uploadMode.getUpload(baseUrl, parts,token,type,text)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .subscribe(new Subscriber<Uploadbean>() {

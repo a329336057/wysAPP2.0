@@ -41,66 +41,8 @@ public interface API {
 
     @Multipart
     @POST("upload/filesUpload")
-    Observable<Uploadbean>getUpload(@Part()List<MultipartBody.Part> parts);
+    Observable<Uploadbean>getUpload(@Part()List<MultipartBody.Part> parts,
+                                    @Header("token") String token,
+                                    @Query("text")String text,
+                                    @Query("type")String type);
 }
-//    /**
-//     * 上传图片
-//     *
-//     * @param file 头像文件
-//     * @return 结果
-//     */
-//    @Multipart
-//    @POST("api/upload/image")
-//    Observable<UserImageResponse> uploadAvatarFile(@Part MultipartBody.Part file);
-
-
-
-//OpenPlatApi.getSmartCallService()
-//        .uploadAvatarFile(OpenPlatApi.createMultipart("file", contentType, file))
-//        .compose(view.applySchedulers())
-//        .subscribe(object :SmartCallNetworkObserver<ICollectContract.View, UserImageResponse>(this) {
-//        override fun onSuccess(view: ICollectContract.View, data: UserImageResponse) {
-//        view.onResponseUploadImage(true, data)
-//        }
-//
-//        override fun onFail(view: ICollectContract.View, data: UserImageResponse) {
-//        view.onResponseUploadImage(false, null)
-//        }
-//
-//        override fun onError(view: ICollectContract.View, throwable: Throwable) {
-//        view.onResponseUploadImage(false ,null)
-//        }
-//
-//        override fun onInitialize(view: ICollectContract.View): NetworkOption {
-//        view.showLoading()
-//        return super.onInitialize(view)
-//        }
-//        })
-
-//    /**
-//     * 通过文件创建Multipart
-//     *
-//     * @param formDataName 表单名
-//     * @param contentType 文件的content-type
-//     * @param file 文件
-//     * @return multipart对象
-//     */
-//    public static MultipartBody.Part createMultipart(String formDataName, String contentType, File file) {
-//        // 参数检查
-//        if (TextUtils.isEmpty(formDataName) || file == null || !file.exists()) {
-//            return null;
-//        }
-//        // content-type对应文件的类型，例如：image/jpg, image/png。
-//        contentType = contentType == null ? "" : contentType;
-//        FileInputStream fileInputStream = null;
-//        try {
-//            fileInputStream = new FileInputStream(file);
-//            RequestBody body = RequestBody.create(MediaType.parse(contentType), ConvertUtils.inputStream2Bytes(fileInputStream));
-//            return MultipartBody.Part.createFormData(formDataName, file.getName(), body);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            CloseUtils.closeIO(fileInputStream);
-//        }
-//        return null;
-//    }

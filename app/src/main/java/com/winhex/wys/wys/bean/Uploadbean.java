@@ -3,26 +3,26 @@ package com.winhex.wys.wys.bean;
 public class Uploadbean {
 
     /**
-     * msg : 上传成功
-     * code : 200
+     * meassage : 上传成功
+     * Code : 200
      */
 
-    private String msg;
-    private int code;
+    private String meassage;
+    private int Code;
 
     public String getMsg() {
-        return msg;
+        return meassage;
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.meassage = msg;
     }
 
     public int getCode() {
-        return code;
+        return Code;
     }
 
     public void setCode(int code) {
-        this.code = code;
+        this.Code = code;
     }
 }

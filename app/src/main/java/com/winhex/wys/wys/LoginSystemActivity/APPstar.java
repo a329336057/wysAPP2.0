@@ -43,8 +43,8 @@ public class APPstar extends AppCompatActivity implements Istartview {
 //                Intent intent=new Intent(APPstar.this,MainActivity.class);
 //                startActivity(intent);
 //                APPstar.this.finish();
-                SharedPreferencesUtil.getInstance(APPstar.this,"tokens");
-                String token=(String) SharedPreferencesUtil.getData("token","获取失败");
+                    SharedPreferencesUtil.getInstance(APPstar.this,"tokens");
+                    String token=(String) SharedPreferencesUtil.getData("token","获取失败");
                 if(token=="获取失败"){
                     ToastUtils.show(APPstar.this,"没有获取到token");
                 }else {

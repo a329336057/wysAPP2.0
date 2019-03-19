@@ -13,10 +13,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.winhex.wys.wys.Activity.Selectphotos;
+import com.winhex.wys.wys.LoginSystemActivity.APPstar;
 import com.winhex.wys.wys.Presenter.Upload.IUploadPresenter;
 import com.winhex.wys.wys.Presenter.Upload.UploadPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.ImageUploadUtile;
+import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
+import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.IUploadView;
 import com.winhex.wys.wys.bean.Uploadbean;
@@ -74,7 +77,9 @@ public class Publish extends AppCompatActivity  implements IUploadView {
             public void onClick(View v) {
                 List<File> fileList=ImageUploadUtile.Path_strTOFile(pathList);
                 List<MultipartBody.Part> partList=ImageUploadUtile.filesToMultipartBodyParts(fileList);
-                uploadPresenter.geinformation(UrlIPconfig.GONGSIIP,partList);
+                SharedPreferencesUtil.getInstance(Publish.this,"tokens");
+                String token=(String) SharedPreferencesUtil.getData("token","获取失败");
+                uploadPresenter.getUpload(UrlIPconfig.GONGSIIP,partList,token,"1","你好啊小姐");
             }
         });
     }
@@ -113,31 +118,14 @@ public class Publish extends AppCompatActivity  implements IUploadView {
 
     @Override
     public void getDataFailed(Throwable e) {
-
+        ToastUtils.show(Publish.this,e.getMessage());
     }
 
     @Override
-    public void getDateSuccess(Uploadbean uploadbean) {
-
+    public void getDateSuccess(Uploadbean uploadbean) { 
+        ToastUtils.show(Publish.this,uploadbean.getMsg());
     }
-    public static void uploadImage(DisposableObserver<ResponseBody> subscriber, String type, List<String> fileUrl) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);//表单类型;
-//        //多张图片
-//        for (int i = 0; i < fileUrl.size(); i++) {
-//            File file = new File(fileUrl.get(i));//filePath 图片地址
-//            RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//            builder.addFormDataPart("file", file.getName(), imageBody);//"imgfile"+i 后台接收图片流的参数名
-//        }
-//        File file = new File(fileUrl.get(0));//filePath 图片地址
-//        RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-//        builder.addFormDataPart("type", type);//imgfile 后台接收图片流的参数名
-//        builder.addFormDataPart("signUrl", "/common/uploadImage");//imgfile 后台接收图片流的参数名
-//        builder.addFormDataPart("version", "1.0");
-//        builder.addFormDataPart("file", file.getName(), imageBody);//imgfile 后台接收图片流的参数名
-//        List<MultipartBody.Part> parts = builder.build().parts();
-//        Observable<ResponseBody> observable =  HttpMethods.getInstance().getHttpApi().uploadImage(parts);
-//        HttpMethods.getInstance().toSubscribe(observable, subscriber);
-    }
+   
 
 
 
