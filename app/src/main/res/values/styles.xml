@@ -12,7 +12,8 @@
         <item name="android:windowBackground">@android:color/white</item>
 
     </style>
-    <declare-styleable name="TitleBar" >
+
+    <declare-styleable name="TitleBar">
         <!-- 整体样式 -->
         <attr name="barStyle">
             <enum name="light" value="0x10" />
@@ -24,7 +25,7 @@
         <attr name="titleColor" format="color" />
         <attr name="titleSize" format="dimension" />
         <!-- 左边 -->
-        <attr name="leftTitle" format="string"/>
+        <attr name="leftTitle" format="string" />
         <attr name="leftIcon" format="reference" /><!-- leftIcon 优先于 backButton -->
         <attr name="backButton" format="boolean" /><!-- 返回按钮（默认开） -->
         <attr name="leftColor" format="color" />
@@ -41,4 +42,8 @@
         <attr name="lineColor" format="reference|color" />
         <attr name="lineSize" format="dimension" />
     </declare-styleable>
+
+    <style name="CommonAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="CommonAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

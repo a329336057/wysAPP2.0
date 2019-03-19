@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-import com.winhex.wys.wys.Presenter.Register.RegisterPresenterImpl;
+import com.winhex.wys.wys.Presenter.LoginSystemPresenter.Register.RegisterPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.SingleClick;
 import com.winhex.wys.wys.Utils.ToastUtils;

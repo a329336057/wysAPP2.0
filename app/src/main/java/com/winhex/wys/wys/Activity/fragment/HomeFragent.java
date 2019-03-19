@@ -1,5 +1,6 @@
 package com.winhex.wys.wys.Activity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -10,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.winhex.wys.wys.Activity.Adapter.LateralAdapter;
+import com.winhex.wys.wys.Activity.Release.Publish;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.GlideImageLoader;
 import com.winhex.wys.wys.Utils.ToastUtils;
@@ -29,9 +33,8 @@ import java.util.List;
 public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener {
     Banner mbanner;
     List<String> lateral_title;
-
-    RecyclerView mlateral;
-
+    ScrollView scrollView;
+    TitleBar titleBar;
     RecyclerView MlateralrecyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +44,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         MlateralrecyclerView.setAdapter(new LateralAdapter(lateral_title,getContext()));
         bannerSetting();
         recyclerViewsetting();
-        
+
         return v;
 
     }
@@ -54,6 +57,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
        // MlateralrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.HORIZONTAL));//横线
         MlateralrecyclerView.setLayoutManager(linearLayoutManager);
+
     }
 
     private void bannerSetting() {
@@ -70,12 +74,24 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     private void findid(View v) {
         MlateralrecyclerView=v.findViewById(R.id.lateral);
+        titleBar=v.findViewById(R.id.hometitel);
         lateral_title=new ArrayList<>();
         for (int i = 0; i <10 ; i++) {
             lateral_title.add("全世界路过"+i);
         }
-        mlateral=v.findViewById(R.id.lateral);
+
+        scrollView=v.findViewById(R.id.home_huadong);
+        scrollView.smoothScrollTo(0,20);
         mbanner=v.findViewById(R.id.banner);
+        scrollView.requestFocus();
+        titleBar.setOnTitleBarListener(this);
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (scrollView!= null){
+            scrollView.fullScroll(View.FOCUS_UP);
+        }
     }
 
 
@@ -86,7 +102,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     @Override
     public void onLeftClick(View v) {
-        
+
     }
 
     @Override
@@ -96,6 +112,8 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     @Override
     public void onRightClick(View v) {
-        
+        Intent intent=new Intent(getActivity(),Publish.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 }

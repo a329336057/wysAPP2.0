@@ -52,7 +52,8 @@ public class LateralAdapter extends RecyclerView.Adapter<LateralAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.textView.setText(list.get(i));
-        
+
+
     }
 
     @Override

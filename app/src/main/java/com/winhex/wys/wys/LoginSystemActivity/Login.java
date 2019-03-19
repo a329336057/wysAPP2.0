@@ -14,7 +14,7 @@ import com.winhex.wys.wys.Activity.MainActivity;
 import com.winhex.wys.wys.Utils.SingleClick;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.Iloginview;
-import com.winhex.wys.wys.Presenter.Login.LoginImpl;
+import com.winhex.wys.wys.Presenter.LoginSystemPresenter.Login.LoginImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 import com.winhex.wys.wys.Utils.ToastUtils;

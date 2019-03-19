@@ -28,7 +28,11 @@
         <activity android:name=".LoginSystemActivity.Login" />
         <activity android:name=".LoginSystemActivity.UserData" />
         <activity android:name=".LoginSystemActivity.Register" />
-        <activity android:name=".Activity.testimages"></activity>
+        <activity android:name=".Activity.testimages" />
+        <activity
+            android:name=".Activity.Release.Publish"
+            android:label="@string/title_activity_publish"
+            android:theme="@style/CommonAppTheme"></activity>
     </application>
 
 </manifest>

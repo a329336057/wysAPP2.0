@@ -1,31 +1,23 @@
 package com.winhex.wys.wys.Activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.winhex.wys.wys.Activity.Adapter.MainActivityViewPagerAdapter;
 import com.winhex.wys.wys.Activity.fragment.HomeFragent;
 import com.winhex.wys.wys.Activity.fragment.MyFragment;
-import com.winhex.wys.wys.Activity.fragment.ReleaseFragment;
-import com.winhex.wys.wys.LoginSystemActivity.Login;
-import com.winhex.wys.wys.LoginSystemActivity.Register;
+import com.winhex.wys.wys.Activity.fragment.ClassifyFragment;
+
 import com.winhex.wys.wys.R;
-import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
-import com.winhex.wys.wys.Utils.ToastUtils;
+
 
 public class MainActivity extends AppCompatActivity  {
 
@@ -53,7 +45,7 @@ public class MainActivity extends AppCompatActivity  {
 //        设置Adapter
         mmainActivityViewPagerAdapter= new MainActivityViewPagerAdapter(getSupportFragmentManager());
         mmainActivityViewPagerAdapter.addFragment(new HomeFragent());
-        mmainActivityViewPagerAdapter.addFragment(new ReleaseFragment());
+        mmainActivityViewPagerAdapter.addFragment(new ClassifyFragment());
         mmainActivityViewPagerAdapter.addFragment(new MyFragment());
         mviewPager.setAdapter(mmainActivityViewPagerAdapter);
 
@@ -106,6 +98,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

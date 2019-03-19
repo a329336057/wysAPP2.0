@@ -2,14 +2,17 @@
 <ScrollView android:layout_height="match_parent"
     
     xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:descendantFocusability="beforeDescendants"
     android:layout_width="match_parent"
     android:scrollbars="vertical"
-    android:fadingEdge="vertical"
+    android:id="@+id/home_huadong"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activity.fragment.HomeFragent"
     android:orientation="vertical">
@@ -17,14 +20,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+
         android:layout_weight="1">
         <com.hjq.bar.TitleBar
-            android:id="@+id/Registerbar"
+            android:id="@+id/hometitel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#03BAE6"
             app:barStyle="transparent"
-            app:leftTitle="返回"
+            app:backButton="false"
             app:rightTitle="发布"
             app:title="首页" />
         <com.youth.banner.Banner
