@@ -12,8 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
+import com.winhex.wys.wys.Activity.MainActivity;
 import com.winhex.wys.wys.Activity.Selectphotos;
 import com.winhex.wys.wys.LoginSystemActivity.APPstar;
+import com.winhex.wys.wys.LoginSystemActivity.Login;
+import com.winhex.wys.wys.LoginSystemActivity.Register;
 import com.winhex.wys.wys.Presenter.Upload.IUploadPresenter;
 import com.winhex.wys.wys.Presenter.Upload.UploadPresenterImpl;
 import com.winhex.wys.wys.R;
@@ -35,9 +40,10 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import rx.Observable;
 
-public class Publish extends AppCompatActivity  implements IUploadView {
+public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBarListener {
     private static final int REQUEST_LIST_CODE = 0;
     private static final int REQUEST_CAMERA_CODE = 1;
+    TitleBar titleBar;
     Button mSelect_images;
     ImageView mimages;
     TextView mImage_url;
@@ -76,7 +82,8 @@ public class Publish extends AppCompatActivity  implements IUploadView {
             @Override
             public void onClick(View v) {
                 List<File> fileList=ImageUploadUtile.Path_strTOFile(pathList);
-                List<MultipartBody.Part> partList=ImageUploadUtile.filesToMultipartBodyParts(fileList);
+
+                List<MultipartBody.Part> partList=ImageUploadUtile.filesToMultipartBodyParts(fileList,Publish.this);
                 SharedPreferencesUtil.getInstance(Publish.this,"tokens");
                 String token=(String) SharedPreferencesUtil.getData("token","获取失败");
                 uploadPresenter.getUpload(UrlIPconfig.GONGSIIP,partList,token,"1","你好啊小姐");
@@ -85,6 +92,7 @@ public class Publish extends AppCompatActivity  implements IUploadView {
     }
 
     private void findid() {
+
         mSelect_images=findViewById(R.id.select_images);
         mImage_url=findViewById(R.id.image_url);
         msgin=findViewById(R.id.sgin);
@@ -92,6 +100,7 @@ public class Publish extends AppCompatActivity  implements IUploadView {
         mMultiselect=findViewById(R.id.Multiselect);
         mUploadImage=findViewById(R.id.publish_image);
         uploadPresenter=new UploadPresenterImpl(this);
+        titleBar=findViewById(R.id.publish_tobar);
         pathList=new ArrayList<>();
     }
     @Override
@@ -122,14 +131,31 @@ public class Publish extends AppCompatActivity  implements IUploadView {
     }
 
     @Override
-    public void getDateSuccess(Uploadbean uploadbean) { 
+    public void getDateSuccess(Uploadbean uploadbean) {
+
         ToastUtils.show(Publish.this,uploadbean.getMsg());
     }
-   
 
 
+    @Override
+    public void onLeftClick(View v) {
+        Intent intent=new Intent(Publish.this,MainActivity.class);
+        startActivity(intent);
+        Publish.this.finish();
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(Publish.this,MainActivity.class);
+        startActivity(intent);
+        Publish.this.finish();
+    }
+    @Override
+    public void onTitleClick(View v) {
 
+    }
 
+    @Override
+    public void onRightClick(View v) {
 
-
+    }
 }

@@ -13,37 +13,63 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.bumptech.glide.Glide;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.winhex.wys.wys.Activity.Adapter.LateralAdapter;
 import com.winhex.wys.wys.Activity.Release.Publish;
+import com.winhex.wys.wys.Activity.lateralBean;
+import com.winhex.wys.wys.Presenter.Home.HomePresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.GlideImageLoader;
+import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 import com.winhex.wys.wys.Utils.ToastUtils;
+import com.winhex.wys.wys.Utils.UrlIPconfig;
+import com.winhex.wys.wys.View.IHomeview;
 import com.winhex.wys.wys.View.Iregisterview;
+import com.winhex.wys.wys.bean.Homebean;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.yuyh.easyadapter.helper.ViewHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
-public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener {
+public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener,IHomeview {
     Banner mbanner;
-    List<String> lateral_title;
+    List<lateralBean> list_lateral=new ArrayList<>();
     ScrollView scrollView;
     TitleBar titleBar;
     RecyclerView MlateralrecyclerView;
+    HomePresenterImpl homePresenter;
+    boolean pd=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
+
         View v=inflater.inflate(R.layout.fragment_home_fragent, container, false);
         findid(v);
-        MlateralrecyclerView.setAdapter(new LateralAdapter(lateral_title,getContext()));
+        homePresenter=new HomePresenterImpl(this);
+        SharedPreferencesUtil.getInstance(getContext(),"tokens");
+        String token=(String) SharedPreferencesUtil.getData("token","获取失败");
+        homePresenter.getHomeData(UrlIPconfig.GONGSIIP,token);
+        try {
+            Thread.currentThread().sleep(1000);//阻断2秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+            MlateralrecyclerView.setAdapter(new LateralAdapter(list_lateral,getContext()));
+            recyclerViewsetting();
+
         bannerSetting();
-        recyclerViewsetting();
+
 
         return v;
 
@@ -69,22 +95,21 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552814100614&di=a925f47f0fae4b3f6aae83ebac3af526&imgtype=0&src=http%3A%2F%2Fimg2.ph.126.net%2F8qSIEmPAwjnxDLtUZVXb7A%3D%3D%2F6631720875607361156.jpg");
         mbanner.setImages(list)
                 .setBannerAnimation(Transformer.DepthPage).setOnBannerListener(this).start();
-        
+
     }
 
     private void findid(View v) {
+
+
         MlateralrecyclerView=v.findViewById(R.id.lateral);
         titleBar=v.findViewById(R.id.hometitel);
-        lateral_title=new ArrayList<>();
-        for (int i = 0; i <10 ; i++) {
-            lateral_title.add("全世界路过"+i);
-        }
-
+        list_lateral=new ArrayList<>();
         scrollView=v.findViewById(R.id.home_huadong);
         scrollView.smoothScrollTo(0,20);
         mbanner=v.findViewById(R.id.banner);
         scrollView.requestFocus();
         titleBar.setOnTitleBarListener(this);
+
     }
     @Override
     public void onHiddenChanged(boolean hidden) {
@@ -115,5 +140,34 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         Intent intent=new Intent(getActivity(),Publish.class);
         startActivity(intent);
         getActivity().finish();
+    }
+
+    @Override
+    public void getDataFailed(Throwable e) {
+
+        ToastUtils.show(getContext(),e.getMessage());
+    }
+
+    @Override
+    public void getDataSuccess(Homebean homebean) {
+                if(homebean.getCode()==200){
+            if(homebean.getHomerow()!=null){
+                addbean(homebean);
+            }else {
+                ToastUtils.show(getContext(),homebean.getMeassage());
+            }
+        }
+    }
+    void addbean(Homebean homebean){
+        List<Homebean.HomerowBean> list=homebean.getHomerow();
+        for (int i = 0; i < list.size(); i++) {
+            lateralBean lateralBean=new lateralBean();
+            lateralBean.setContent(list.get(i).getContent());
+            lateralBean.setImage(list.get(i).getImage());
+            lateralBean.setHead_portrait(R.drawable.classify_1);
+            list_lateral.add(lateralBean);
+        }
+        pd=true;
+
     }
 }

@@ -10,6 +10,7 @@ import okhttp3.MultipartBody;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
+
 public class UploadPresenterImpl implements IUploadPresenter {
     private UploadMode uploadMode;
     private IUploadView view;
@@ -20,6 +21,8 @@ public class UploadPresenterImpl implements IUploadPresenter {
     }
     @Override
     public void getUpload(String baseUrl, List<MultipartBody.Part> parts,String token,String type,String text) {
+
+
         uploadMode.getUpload(baseUrl, parts,token,type,text)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())

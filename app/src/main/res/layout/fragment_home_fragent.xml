@@ -72,7 +72,6 @@
             android:layout_height="2dip"
             android:background="#DFDFDF" /> 
         <android.support.v7.widget.RecyclerView
-       
             android:layout_width="match_parent"
             android:layout_height="297dp"
             android:id="@+id/lateral"/>

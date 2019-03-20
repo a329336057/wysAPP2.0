@@ -11,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.winhex.wys.wys.Activity.Adapter.MainActivityViewPagerAdapter;
 import com.winhex.wys.wys.Activity.fragment.HomeFragent;
 import com.winhex.wys.wys.Activity.fragment.MyFragment;
@@ -31,6 +32,14 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.get(MainActivity.this).clearDiskCache();
+
+            }
+        });
+        Glide.get(this).clearMemory();
         settinglayout();
 
 

@@ -1,5 +1,6 @@
 package com.winhex.wys.wys;
 
+import com.winhex.wys.wys.bean.Homebean;
 import com.winhex.wys.wys.bean.Informationbean;
 import com.winhex.wys.wys.bean.Loginbean;
 import com.winhex.wys.wys.bean.Registerbean;
@@ -45,4 +46,7 @@ public interface API {
                                     @Header("token") String token,
                                     @Query("text")String text,
                                     @Query("type")String type);
+
+    @POST("Home/homedata")
+    Observable<Homebean>getHomedata(@Header("token")String token);
 }
