@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,6 +39,7 @@ public class LateralAdapter extends RecyclerView.Adapter<LateralAdapter.ViewHold
             textView=v.findViewById(R.id.lateral_title);
             phtonimage=v.findViewById(R.id.lateral_iamge);
             headimage=v.findViewById(R.id.lateral_head);
+            
         }
         
     }

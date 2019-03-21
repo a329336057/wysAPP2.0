@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Date {
+public  class  Date {
 
 
     public static List<String> height(List<String> list){
@@ -18,6 +18,17 @@ public class Date {
         List<String> sex=new ArrayList<>();
         sex.add("男");
         sex.add("女");
+        return sex;
+    }
+    public static List<String> classfiy(){
+        List<String> sex=new ArrayList<>();
+        sex.add("美食");//美食
+        sex.add("心情");//心情
+        sex.add("旅游");//旅游
+        sex.add("自拍");//自拍
+        sex.add("记录");//记录
+        sex.add("分享");//分享
+        sex.add("打广告");//打广告
         return sex;
     }
 

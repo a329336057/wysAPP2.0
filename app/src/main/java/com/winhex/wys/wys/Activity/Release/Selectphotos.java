@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.Activity.Release;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -86,8 +86,8 @@ public class Selectphotos {
      * @param t
      * @param REQUEST_LIST_CODE
      */
-    public  void multiSelect(Activity activity,TextView t,int REQUEST_LIST_CODE){
-        t.setText("");
+    public  void multiSelect(Activity activity,int REQUEST_LIST_CODE){
+      
         ISListConfig config = new ISListConfig.Builder()
                 .multiSelect(true)
                 // 是否记住上次选中记录

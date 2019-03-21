@@ -1,48 +1,24 @@
 package com.winhex.wys.wys.Activity.fragment;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.winhex.wys.wys.Activity.Adapter.ClassifyAdapter;
 import com.winhex.wys.wys.Activity.Release.Publish;
-import com.winhex.wys.wys.Activity.Selectphotos;
 import com.winhex.wys.wys.R;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-import static android.app.Activity.RESULT_OK;
 
 
 public class ClassifyFragment extends Fragment implements OnTitleBarListener {

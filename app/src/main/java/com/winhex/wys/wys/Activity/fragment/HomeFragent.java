@@ -108,6 +108,9 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     }
 
+    /**
+     * banner设置
+     */
     private void bannerSetting() {
         mbanner.setImageLoader(new GlideImageLoader());
         final List<String> list=new ArrayList<>();
@@ -120,7 +123,10 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     }
 
-
+    /**
+     * 查询ID
+     * @param v
+     */
     private void findid(View v) {
         list_lateral=new ArrayList<>();
 
@@ -135,6 +141,11 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         titleBar.setOnTitleBarListener(this);
 
     }
+
+    /**
+     * 滚动条
+     * @param hidden
+     */
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -144,6 +155,10 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     }
 
 
+    /**
+     * 标题点击
+     * @param position
+     */
     @Override
     public void OnBannerClick(int position) {
         ToastUtils.show(getContext(),"你点击了"+position);
@@ -159,6 +174,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     }
 
+  
     @Override
     public void onRightClick(View v) {
         Intent intent=new Intent(getActivity(),Publish.class);
@@ -166,6 +182,11 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         getActivity().finish();
     }
 
+    /**
+     * 数据获取接口
+     * @param e
+     */
+    
     @Override
     public void getDataFailed(Throwable e) {
 
@@ -176,10 +197,12 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     public void getDataSuccess(Homebean homebean) {
                 if(homebean.getCode()==200){
             if(homebean.getHomerow()!=null){
+                //发送messgae
+                addbean(homebean);
                 Message message=new Message();
                 message.what=1;
                 handler.sendMessage(message);
-                addbean(homebean);
+              
 
             }else {
 
@@ -188,6 +211,11 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
             }
         }
     }
+
+    /**
+     * 接口数据赋值
+     * @param homebean
+     */
     void addbean(Homebean homebean){
         List<Homebean.HomerowBean> list=homebean.getHomerow();
         for (int i = 0; i < list.size(); i++) {
@@ -198,7 +226,6 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
             list_lateral.add(lateralBean);
 
         }
-        lateralAdapter.notifyDataSetChanged();
 
     }
 }
