@@ -1,4 +1,4 @@
-package com.winhex.wys.wys.Activity;
+package com.winhex.wys.wys.bean;
 
 public class lateralBean {
 

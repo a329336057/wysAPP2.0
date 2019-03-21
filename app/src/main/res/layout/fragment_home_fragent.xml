@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    app:srlPrimaryColor="#008cff"
+    app:srlAccentColor="@android:color/white"
+    app:srlEnablePreviewInEditMode="true">
+    <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
+    <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 <ScrollView android:layout_height="match_parent"
-    
-    xmlns:android="http://schemas.android.com/apk/res/android" 
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:descendantFocusability="beforeDescendants"
     android:layout_width="match_parent"
     android:scrollbars="vertical"
@@ -9,6 +23,8 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     >
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,12 +32,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activity.fragment.HomeFragent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
 
-        android:layout_weight="1">
+
+
         <com.hjq.bar.TitleBar
             android:id="@+id/hometitel"
             android:layout_width="match_parent"
@@ -76,12 +89,12 @@
             android:layout_height="297dp"
             android:id="@+id/lateral"/>
 
-            
+
     </LinearLayout>
 
 
-  
-
-
-</LinearLayout>
 </ScrollView>
+    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

@@ -6,13 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.internal.bind.TreeTypeAdapter;
-import com.winhex.wys.wys.Activity.lateralBean;
+import com.winhex.wys.wys.bean.lateralBean;
 import com.winhex.wys.wys.R;
 
 import com.winhex.wys.wys.Utils.ToastUtils;
