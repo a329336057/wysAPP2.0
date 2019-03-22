@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    app:srlPrimaryColor="#008cff"
     app:srlAccentColor="@android:color/white"
-    app:srlEnablePreviewInEditMode="true">
+    app:srlEnablePreviewInEditMode="true"
+    app:srlPrimaryColor="#008cff">
     <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
     <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
+
+
     <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-<ScrollView android:layout_height="match_parent"
 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:descendantFocusability="beforeDescendants"
-    android:layout_width="match_parent"
-    android:scrollbars="vertical"
-    android:id="@+id/home_huadong"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    >
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Activity.fragment.HomeFragent"
-    android:orientation="vertical">
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/home_huadong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical">
 
 
-
-        <com.hjq.bar.TitleBar
-            android:id="@+id/hometitel"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#03BAE6"
-            app:barStyle="transparent"
-            app:backButton="false"
-            app:rightTitle="发布"
-            app:title="首页" />
-        <com.youth.banner.Banner
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="185dp" />
+            android:orientation="vertical"
+            tools:context=".Activity.fragment.HomeFragent">
+
+            <com.hjq.bar.TitleBar
+                android:id="@+id/hometitel"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_height="wrap_content"
+                android:background="#03BAE6"
+                app:backButton="false"
+                app:barStyle="transparent"
+                app:rightTitle="发布"
+                app:title="首页"/>
+
+            <com.youth.banner.Banner
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="185dp"/>
 
             <LinearLayout
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
                 android:background="@drawable/sendwordbackgroud"
-                android:layout_height="105dp" 
-                android:orientation="horizontal"
-               >
-                
-       
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="17日"
-                    android:textSize="20dp"
-                    android:layout_marginHorizontal="10dp"
-                    android:textColor="#ffffff"/>
+                    android:textColor="#ffffff"
+                    android:textSize="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="努力吧，请珍惜人生最宝贵的青春的时光，去实现你远大崇高的理想。只盯着个人的利益与得失，只追求吃喝与享乐的理想，那是猪栏式的理想;只有将自己的才华与社会的需要、国家乃至人类的利益集合起来。"
                     android:layout_weight="6"
-                    android:textColor="#ffffff"
-                    android:padding="5dp"
                     android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="努力吧，请珍惜人生最宝贵的青春的时光，去实现你远大崇高的理想。只盯着个人的利益与得失，只追求吃喝与享乐的理想，那是猪栏式的理想;只有将自己的才华与社会的需要、国家乃至人类的利益集合起来。"
+                    android:textColor="#ffffff"
                     android:textSize="13sp"/>
+
             </LinearLayout>
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#DFDFDF" /> 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="297dp"
-            android:id="@+id/lateral"/>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:background="#DFDFDF"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/lateral"
+                android:layout_width="match_parent"
+                android:layout_height="297dp"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-</ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+
     <com.scwang.smartrefresh.layout.footer.ClassicsFooter
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
