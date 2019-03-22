@@ -1,5 +1,6 @@
 package com.winhex.wys.wys.Activity.Release;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +62,7 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
     UploadPresenterImpl uploadPresenter;
     //上传照片
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public  void  handleMessage(Message message){
@@ -82,7 +85,7 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         findid();
-       
+        ToastUtils.show(Publish.this,upload_context.getText().toString());
         select_phton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,9 +95,9 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(upload_context.getText().toString()!=null &&upload_context.getText().toString()!=""){
-                    if (typetextview.getText()!="请选择"){
-                        if(listfile!=null){
+                if(!TextUtils.isEmpty(upload_context.getText().toString())){
+                    if (!TextUtils.isEmpty(typetextview.getText().toString())&&typetextview.getText().toString()!="未选择"){
+                        if(listfile.size()>0){
                             List<File> fileList=ImageUploadUtile.Path_strTOFile(listfile);
                             List<MultipartBody.Part> partList=ImageUploadUtile.filesToMultipartBodyParts(fileList,Publish.this);
                             SharedPreferencesUtil.getInstance(Publish.this,"tokens");
@@ -139,8 +142,9 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
         recyclerView=findViewById(R.id.upload_phton);
         uploadPresenter=new UploadPresenterImpl(this);
         titleBar=findViewById(R.id.publish_tobar);
+        titleBar.setOnTitleBarListener(this);
         listfile=new ArrayList<>();
-    
+
  
     }
     @Override
@@ -196,6 +200,9 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
     public void getDateSuccess(Uploadbean uploadbean) {
 
         ToastUtils.show(Publish.this,uploadbean.getMsg());
+        Intent intent=new Intent(Publish.this,MainActivity.class);
+        startActivity(intent);
+        Publish.this.finish();
     }
 
 

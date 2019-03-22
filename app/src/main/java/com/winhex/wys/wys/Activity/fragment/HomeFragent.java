@@ -1,5 +1,6 @@
 package com.winhex.wys.wys.Activity.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,6 +48,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     HomePresenterImpl homePresenter;
     LateralAdapter lateralAdapter;
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public  void  handleMessage(Message message){
@@ -54,7 +56,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
                     lateralAdapter=new LateralAdapter(list_lateral,getContext());
                     MlateralrecyclerView.setAdapter(lateralAdapter);
                     lateralAdapter.notifyDataSetChanged();
-                    recyclerViewsetting();
+                        recyclerViewsetting();
                     ToastUtils.show(getContext(),"刷新成功");
                 }
         }
@@ -80,11 +82,9 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     msmartlayout.setOnRefreshListener(new OnRefreshListener() {
         @Override
         public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-            lateralAdapter=new LateralAdapter(list_lateral,getContext());
-            MlateralrecyclerView.setAdapter(lateralAdapter);
-            lateralAdapter.notifyDataSetChanged();
-            recyclerViewsetting();
-            refreshLayout.finishRefresh();
+            SharedPreferencesUtil.getInstance(getContext(),"tokens");
+            homePresenter.getHomeData(UrlIPconfig.GONGSIIP,(String) SharedPreferencesUtil.getData("token","没有token"));
+            refreshLayout.finishRefresh(1000);
         }
     });
     }
@@ -113,7 +113,6 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         list.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552814100614&di=a925f47f0fae4b3f6aae83ebac3af526&imgtype=0&src=http%3A%2F%2Fimg2.ph.126.net%2F8qSIEmPAwjnxDLtUZVXb7A%3D%3D%2F6631720875607361156.jpg");
         mbanner.setImages(list)
                 .setBannerAnimation(Transformer.DepthPage).setOnBannerListener(this).start();
-
     }
 
     /**
@@ -193,16 +192,13 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
                 if(homebean.getCode()==200){
             if(homebean.getHomerow()!=null){
                 //发送messgae
+                list_lateral.clear();
                 addbean(homebean);
                 Message message=new Message();
                 message.what=1;
                 handler.sendMessage(message);
-              
-
             }else {
-
                 ToastUtils.show(getContext(),homebean.getMeassage());
-
             }
         }
     }
@@ -213,13 +209,13 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
      */
     void addbean(Homebean homebean){
         List<Homebean.HomerowBean> list=homebean.getHomerow();
+        int a=3;
         for (int i = 0; i < list.size(); i++) {
             lateralBean lateralBean=new lateralBean();
             lateralBean.setContent(list.get(i).getContent());
             lateralBean.setImage(list.get(i).getImage());
             lateralBean.setHead_portrait(R.drawable.classify_1);
             list_lateral.add(lateralBean);
-
         }
 
     }
