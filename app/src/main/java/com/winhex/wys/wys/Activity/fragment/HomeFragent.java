@@ -1,29 +1,25 @@
 package com.winhex.wys.wys.Activity.fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.winhex.wys.wys.Activity.Adapter.LateralAdapter;
 import com.winhex.wys.wys.Activity.Release.Publish;
-
-import com.winhex.wys.wys.bean.lateralBean;
 import com.winhex.wys.wys.Presenter.Home.HomePresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.GlideImageLoader;
@@ -32,23 +28,20 @@ import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.IHomeview;
 import com.winhex.wys.wys.bean.Homebean;
+import com.winhex.wys.wys.bean.lateralBean;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import retrofit2.http.Header;
 
 
 public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener,IHomeview {
     SmartRefreshLayout msmartlayout;
     Banner mbanner;
     List<lateralBean> list_lateral=new ArrayList<>();
-    ScrollView scrollView;
+    NestedScrollView scrollView;
     TitleBar titleBar;
     RecyclerView MlateralrecyclerView;
     HomePresenterImpl homePresenter;
@@ -139,6 +132,8 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
         mbanner=v.findViewById(R.id.banner);
         scrollView.requestFocus();
         titleBar.setOnTitleBarListener(this);
+
+        MlateralrecyclerView.setNestedScrollingEnabled(false);
 
     }
 
