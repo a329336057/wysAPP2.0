@@ -18,6 +18,7 @@ import com.winhex.wys.wys.Activity.fragment.MyFragment;
 import com.winhex.wys.wys.Activity.fragment.ClassifyFragment;
 
 import com.winhex.wys.wys.R;
+import com.winhex.wys.wys.datails.Datails;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -32,13 +33,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Glide.get(MainActivity.this).clearDiskCache();
 
-            }
-        });
         Glide.get(this).clearMemory();
         settinglayout();
 

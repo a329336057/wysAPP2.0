@@ -33,12 +33,13 @@ import com.winhex.wys.wys.bean.lateralBean;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
+import com.yuyh.easyadapter.helper.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener,IHomeview {
+public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBarListener,IHomeview{
     SmartRefreshLayout msmartlayout;
     Banner mbanner;
     List<lateralBean> list_lateral=new ArrayList<>();
@@ -56,6 +57,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
                     lateralAdapter=new LateralAdapter(list_lateral,getContext());
                     MlateralrecyclerView.setAdapter(lateralAdapter);
                     lateralAdapter.notifyDataSetChanged();
+
                         recyclerViewsetting();
                     ToastUtils.show(getContext(),"刷新成功");
                 }
@@ -87,6 +89,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
             refreshLayout.finishRefresh(1000);
         }
     });
+
     }
 
 
@@ -216,6 +219,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
             lateralBean.setImage(list.get(i).getImage());
             lateralBean.setHead_portrait(R.drawable.classify_1);
             list_lateral.add(lateralBean);
+
         }
 
     }
