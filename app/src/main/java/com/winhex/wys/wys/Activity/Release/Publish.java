@@ -10,12 +10,24 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -27,6 +39,7 @@ import com.winhex.wys.wys.Activity.MainActivity;
 import com.winhex.wys.wys.Presenter.Upload.UploadPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.ImageUploadUtile;
+import com.winhex.wys.wys.Utils.IsGpsWork;
 import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
@@ -53,10 +66,17 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
     RecyclerView recyclerView;
     TextView typetextview;
     PhtonAdapter phtonAdapter;
-
+    TextView location_tv;
     List<String> listfile;
     List<String> list=new ArrayList<>();
 
+    //声明AMapLocationClient类对象
+    AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+
+
+     GeocodeSearch geocodeSearch;
 
     Selectphotos selectphotos=new Selectphotos();
     UploadPresenterImpl uploadPresenter;
@@ -84,7 +104,9 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
+        getCurrentLocationLatLng();
         findid();
+
         ToastUtils.show(Publish.this,upload_context.getText().toString());
         select_phton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +153,48 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
                 pickerView.show();
             }
         });
+
     }
+
+    /**
+     *  初始化定位并设置定位回调监听
+     */
+    private void getCurrentLocationLatLng(){
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+
+ /* //设置定位场景，目前支持三种场景（签到、出行、运动，默认无场景） 设置了场景就不用配置定位模式等
+    option.setLocationPurpose(AMapLocationClientOption.AMapLocationPurpose.SignIn);
+    if(null != locationClient){
+        locationClient.setLocationOption(option);
+        //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
+        locationClient.stopLocation();
+        locationClient.startLocation();
+    }*/
+        // 同时使用网络定位和GPS定位,优先返回最高精度的定位结果,以及对应的地址描述信息
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //只会使用网络定位
+        /* mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);*/
+        //只使用GPS进行定位
+        /*mLocationOption.setLocationMode(AMapLocationMode.Device_Sensors);*/
+        // 设置为单次定位 默认为false
+        /*mLocationOption.setOnceLocation(true);*/
+        //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。默认连续定位 切最低时间间隔为1000ms
+        mLocationOption.setInterval(3500);
+        //设置是否返回地址信息（默认返回地址信息）
+        /*mLocationOption.setNeedAddress(true);*/
+        //关闭缓存机制 默认开启 ，在高精度模式和低功耗模式下进行的网络定位结果均会生成本地缓存,不区分单次定位还是连续定位。GPS定位结果不会被缓存。
+        /*mLocationOption.setLocationCacheEnable(false);*/
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+    }
+
 
     private void findid() {
         linearLayout=findViewById(R.id.upload_type);
@@ -144,8 +207,8 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
         titleBar=findViewById(R.id.publish_tobar);
         titleBar.setOnTitleBarListener(this);
         listfile=new ArrayList<>();
+        location_tv=findViewById(R.id.local);
 
- 
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -240,5 +303,53 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
      
 
     }
+
+
+
+
+
+
+    /**
+     * 定位回调监听器
+     */
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation amapLocation) {
+            if (!IsGpsWork.isGpsEnabled(getApplicationContext())) {
+              ToastUtils.show(Publish.this,"GPS未开启");
+            } else {
+                if (amapLocation != null) {
+                    if (amapLocation.getErrorCode() == 0) {
+                        //定位成功回调信息，设置相关消息
+                        amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                        double currentLat = amapLocation.getLatitude();//获取纬度
+                        double currentLon = amapLocation.getLongitude();//获取经度
+                        if (amapLocation != null) {
+                            if (amapLocation.getErrorCode() == 0) {
+                                location_tv.setText(amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum()+amapLocation.getFloor()  );
+                            //可在其中解析amapLocation获取相应内容。
+                            }else {
+                                //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                                Log.e("AmapError","location Error, ErrCode:"
+                                        + amapLocation.getErrorCode() + ", errInfo:"
+                                        + amapLocation.getErrorInfo());
+                            }
+                        }
+                        /*currentLatLng = new LatLng(currentLat, currentLon);*/   //latlng形式的
+
+                        Log.i("currentLocation", "currentLat : " + currentLat + " currentLon : " + currentLon);
+                        amapLocation.getAccuracy();//获取精度信息
+                    } else {
+                        //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                        Log.e("AmapError", "location Error, ErrCode:"
+                                + amapLocation.getErrorCode() + ", errInfo:"
+                                + amapLocation.getErrorInfo());
+                    }
+                }
+            }
+        }
+    };
+
+
 
 }

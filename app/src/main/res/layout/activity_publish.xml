@@ -22,7 +22,7 @@
             app:title="发布" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="185dp"
+            android:layout_height="210dp"
             android:background="@color/write"
             android:orientation="vertical">
             <EditText
@@ -44,7 +44,14 @@
                 android:layout_height="80dp"
                 android:background="@drawable/upload_image"
                 android:layout_gravity="left"
-                android:layout_marginLeft="10dp"/>  
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="5dp"
+                android:id="@+id/local"
+                android:text="坐标"/>
         </LinearLayout>
           
         
