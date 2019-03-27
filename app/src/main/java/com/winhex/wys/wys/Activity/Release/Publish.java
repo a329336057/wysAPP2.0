@@ -2,9 +2,12 @@ package com.winhex.wys.wys.Activity.Release;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +39,7 @@ import com.hjq.bar.TitleBar;
 import com.winhex.wys.wys.Activity.Adapter.ClassifyAdapter;
 import com.winhex.wys.wys.Activity.Adapter.LateralAdapter;
 import com.winhex.wys.wys.Activity.MainActivity;
+import com.winhex.wys.wys.LoginSystemActivity.APPstar;
 import com.winhex.wys.wys.Presenter.Upload.UploadPresenterImpl;
 import com.winhex.wys.wys.R;
 import com.winhex.wys.wys.Utils.ImageUploadUtile;
@@ -70,13 +74,15 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
     List<String> listfile;
     List<String> list=new ArrayList<>();
 
+    //坐标
+    String coordinate="";
+
     //声明AMapLocationClient类对象
     AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
 
 
-     GeocodeSearch geocodeSearch;
 
     Selectphotos selectphotos=new Selectphotos();
     UploadPresenterImpl uploadPresenter;
@@ -124,7 +130,15 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
                             List<MultipartBody.Part> partList=ImageUploadUtile.filesToMultipartBodyParts(fileList,Publish.this);
                             SharedPreferencesUtil.getInstance(Publish.this,"tokens");
                             String token=(String) SharedPreferencesUtil.getData("token","获取失败");
-                            uploadPresenter.getUpload(UrlIPconfig.GONGSIIP,partList,token,typetextview.getText().toString(),upload_context.getText().toString());
+                            if(!TextUtils.isEmpty(coordinate)) {
+                                uploadPresenter.getUpload(UrlIPconfig.GONGSIIP, partList, token, typetextview.getText().toString(),
+                                        upload_context.getText().toString(),coordinate);
+                            }else {
+                                location_tv.setText("");
+                                uploadPresenter.getUpload(UrlIPconfig.GONGSIIP, partList, token, typetextview.getText().toString(),
+                                        upload_context.getText().toString(),coordinate);
+                            }
+
                         }else {
                             ToastUtils.show(Publish.this,"没有图片哦 分享必须要有图片才行！");
                         }
@@ -208,7 +222,9 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
         titleBar.setOnTitleBarListener(this);
         listfile=new ArrayList<>();
         location_tv=findViewById(R.id.local);
-
+        if (ContextCompat.checkSelfPermission(Publish.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(Publish.this, new String []{android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -326,6 +342,7 @@ public class Publish extends AppCompatActivity  implements IUploadView,OnTitleBa
                         double currentLon = amapLocation.getLongitude();//获取经度
                         if (amapLocation != null) {
                             if (amapLocation.getErrorCode() == 0) {
+                                coordinate=String.valueOf(currentLat)+","+String.valueOf(currentLon);
                                 location_tv.setText(amapLocation.getCity()+amapLocation.getDistrict()+amapLocation.getStreet()+amapLocation.getStreetNum()+amapLocation.getFloor()  );
                             //可在其中解析amapLocation获取相应内容。
                             }else {

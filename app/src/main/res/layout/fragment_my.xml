@@ -5,17 +5,193 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.fragment.MyFragment">
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="退出登陆"
-    android:id="@+id/SignOut"/>
-    <!-- TODO: Update blank fragment layout -->
-    <com.amap.api.maps.MapView
-        android:id="@+id/map"
+    android:gravity="center_horizontal"
+    tools:context=".Activity.fragment.MyFragment"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="278dp"
+        android:background="@drawable/mybackground"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/head_portrait"
+            android:layout_marginTop="52dp"
+            />
+        <TextView
+            android:layout_marginTop="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="欢迎你：为你神话"
+            android:textColor="@color/write"
+            android:textSize="13dp"/>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="360dp"
+    android:layout_height="280dp"
+    android:layout_marginTop="-85dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/mydata_background">
 
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mydata"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的资料"
+            android:textSize="13dp"/>
+        <ImageView
+            android:layout_marginLeft="207dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fanhui"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="333dp"
+        android:layout_height="1px"
+        android:background="@color/bottom_bg"></View>
+
+
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/myrelease"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的发布"
+            android:textSize="13dp"/>
+        <ImageView
+            android:layout_marginLeft="207dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fanhui"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="333dp"
+        android:layout_height="1px"
+        android:background="@color/bottom_bg"></View>
+
+
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mymessage"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的消息"
+            android:textSize="13dp"/>
+        <ImageView
+            android:layout_marginLeft="207dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fanhui"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="333dp"
+        android:layout_height="1px"
+        android:background="@color/bottom_bg"></View>
+
+    <LinearLayout
+        android:layout_width="333dp"
+        android:layout_height="60dp"
+
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/about_wys"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关于万源社"
+            android:textSize="13dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="194dp"
+            android:src="@drawable/fanhui" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="95dp"
+        android:background="@drawable/my_outbackgorund"
+        android:orientation="horizontal"
+        android:layout_marginTop="-16dp"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:id="@+id/login_out"
+            android:layout_width="333dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="3dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ligonout"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出登陆"
+            android:textSize="13dp"/>
+
+        <ImageView
+            android:id="@+id/outlogins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="208dp"
+            android:src="@drawable/fanhui" />
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

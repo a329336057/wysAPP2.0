@@ -45,7 +45,9 @@ public interface API {
     Observable<Uploadbean>getUpload(@Part()List<MultipartBody.Part> parts,
                                     @Header("token") String token,
                                     @Query("text")String text,
-                                    @Query("type")String type);
+                                    @Query("type")String type,
+                                    @Query("localpostion")String localpostion
+    );
 
     @POST("Home/homedata")
     Observable<Homebean>getHomedata(@Header("token")String token);

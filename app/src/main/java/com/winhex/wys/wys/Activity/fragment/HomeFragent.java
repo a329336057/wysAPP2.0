@@ -33,7 +33,6 @@ import com.winhex.wys.wys.bean.lateralBean;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
-import com.yuyh.easyadapter.helper.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;

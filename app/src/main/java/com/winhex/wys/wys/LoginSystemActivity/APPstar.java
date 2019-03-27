@@ -1,7 +1,10 @@
 package com.winhex.wys.wys.LoginSystemActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,13 +39,13 @@ public class APPstar extends AppCompatActivity implements Istartview {
         login.setVisibility(View.INVISIBLE);
         zhuce.setVisibility(View.INVISIBLE);
         Handler handler=new Handler();
-
+        if (ContextCompat.checkSelfPermission(APPstar.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(APPstar.this, new String []{android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
+        }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() { 
-//                Intent intent=new Intent(APPstar.this,MainActivity.class);
-//                startActivity(intent);
-//                APPstar.this.finish();
+
                     SharedPreferencesUtil.getInstance(APPstar.this,"tokens");
                     String token=(String) SharedPreferencesUtil.getData("token","获取失败");
                 if(token=="获取失败"){

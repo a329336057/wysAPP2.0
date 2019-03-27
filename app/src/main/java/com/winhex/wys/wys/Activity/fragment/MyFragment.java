@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.amap.api.maps.MapView;
 import com.amap.api.services.core.LatLonPoint;
@@ -25,28 +26,18 @@ import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 import com.winhex.wys.wys.Utils.ToastUtils;
 
 
-public class MyFragment extends Fragment implements GeocodeSearch.OnGeocodeSearchListener {
-    Button mSignOut;
-    MapView mapView;
-    GeocodeSearch geocodeSearch;
-    LatLonPoint latLonPoint;
+public class MyFragment extends Fragment {
+    LinearLayout mloginout;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_my, container, false);
-        mSignOut=v.findViewById(R.id.SignOut);
-        mapView=v.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
-        latLonPoint=new LatLonPoint(39.90403, 116.407525);
-        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(getActivity(), new String []{android.Manifest.permission.ACCESS_COARSE_LOCATION},1);
-        }
-        geocodeSearch=new GeocodeSearch(getContext());
-        geocodeSearch.setOnGeocodeSearchListener(this);
-        RegeocodeQuery query=new RegeocodeQuery(latLonPoint,200,GeocodeSearch.AMAP);
-        geocodeSearch.getFromLocationAsyn(query);
+        mloginout=v.findViewById(R.id.login_out);
+
         signout();
+
         return v;
 
         /**
@@ -57,7 +48,7 @@ public class MyFragment extends Fragment implements GeocodeSearch.OnGeocodeSearc
 
 
     private void signout() {
-        mSignOut.setOnClickListener(new View.OnClickListener() {
+        mloginout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtil.getInstance(getContext(),"tokens");
@@ -69,15 +60,5 @@ public class MyFragment extends Fragment implements GeocodeSearch.OnGeocodeSearc
         });
     }
 
-    @Override
-    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-        int a=i;
-        ToastUtils.show(getContext(),regeocodeResult.getRegeocodeAddress().getFormatAddress());
-    }
 
-    @Override
-    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
-        int a=i;
-        ToastUtils.show(getContext(),geocodeResult.getGeocodeAddressList().toString());
-    }
 }

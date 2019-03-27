@@ -37,9 +37,34 @@ public class MainActivity extends AppCompatActivity  {
         Glide.get(this).clearMemory();
         settinglayout();
 
-
+        mbottomNavigationMenuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                resetToDefaultIcon();//重置到默认不选中图片
+                switch (item.getItemId()) {
+                    case R.id.homeblack:
+                        //在这里替换图标
+                        item.setIcon(R.drawable.select_home_icon);
+                        return true;
+                    case R.id.Release:
+                        item.setIcon(R.drawable.select_classify_icon);
+                        return true;
+                    case R.id.My:
+                        item.setIcon(R.drawable.select_my_icon);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
+
+
+    private void resetToDefaultIcon() {
+        MenuItem home =  mbottomNavigationMenuView.getMenu().findItem(R.id.homeblack);
+        home.setIcon(R.drawable.select_home_icon);
+
+    }
     /**
      * 设置布局
      */
@@ -61,17 +86,21 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 //               获取到菜单项的Id
+                resetToDefaultIcon();
                 int itemId = item.getItemId();
 //                当第一项被选择时BlankFragmentOne显示，以此类推
                 switch (itemId) {
                     case R.id.homeblack:
+                        item.setIcon(R.drawable.select_home_icon);
                         mviewPager.setCurrentItem(0);
                         break;
                     case R.id.Release:
                         mviewPager.setCurrentItem(1);
+                        item.setIcon(R.drawable.select_classify_icon);
                         break;
                     case R.id.My:
                         mviewPager.setCurrentItem(2);
+                        item.setIcon(R.drawable.select_my_icon);
                         break;
 
 

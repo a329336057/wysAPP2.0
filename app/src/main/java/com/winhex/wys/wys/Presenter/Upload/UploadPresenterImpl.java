@@ -20,10 +20,10 @@ public class UploadPresenterImpl implements IUploadPresenter {
         this.view=view;
     }
     @Override
-    public void getUpload(String baseUrl, List<MultipartBody.Part> parts,String token,String type,String text) {
+    public void getUpload(String baseUrl, List<MultipartBody.Part> parts,String token,String type,String text,String localpostion) {
 
 
-        uploadMode.getUpload(baseUrl, parts,token,type,text)
+        uploadMode.getUpload(baseUrl, parts,token,type,text,localpostion)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .subscribe(new Subscriber<Uploadbean>() {
