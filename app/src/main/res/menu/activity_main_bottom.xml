@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
     android:id="@+id/homeblack"
-    android:icon="@drawable/homeblack"
+    android:icon="@drawable/home_icon"
     android:checkable="false"
     android:enabled="true"
     android:title="首页" />
 <item
     android:id="@+id/Release"
-    android:icon="@drawable/image"
+    android:icon="@drawable/classify_icon"
     android:checkable="false"
     android:enabled="true"
     android:title="发布" />
     <item
         android:id="@+id/My"
-        android:icon="@drawable/user"
+        android:icon="@drawable/my_icon"
         android:checkable="false"
         android:enabled="true"
         android:title="我的" />

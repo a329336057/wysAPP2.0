@@ -7,4 +7,5 @@
     <color name="colorblack">#192129</color>
     <color name="write">#ffffff</color>
     <color name="button">#03BAE6</color>
+    <color name="colorGray">#ccc</color>
 </resources>

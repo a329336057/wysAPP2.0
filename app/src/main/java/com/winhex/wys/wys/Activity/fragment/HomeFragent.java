@@ -191,7 +191,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
 
     @Override
     public void getDataSuccess(Homebean homebean) {
-                if(homebean.getCode()==200){
+            if(homebean.getCode()==200){
             if(homebean.getHomerow()!=null){
                 //发送messgae
                 list_lateral.clear();

@@ -37,25 +37,7 @@ public class MainActivity extends AppCompatActivity  {
         Glide.get(this).clearMemory();
         settinglayout();
 
-        mbottomNavigationMenuView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                resetToDefaultIcon();//重置到默认不选中图片
-                switch (item.getItemId()) {
-                    case R.id.homeblack:
-                        //在这里替换图标
-                        item.setIcon(R.drawable.select_home_icon);
-                        return true;
-                    case R.id.Release:
-                        item.setIcon(R.drawable.select_classify_icon);
-                        return true;
-                    case R.id.My:
-                        item.setIcon(R.drawable.select_my_icon);
-                        return true;
-                }
-                return false;
-            }
-        });
+
     }
 
 
