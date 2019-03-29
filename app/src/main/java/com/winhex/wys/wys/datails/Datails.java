@@ -17,10 +17,13 @@ public class Datails extends AppCompatActivity {
     private ViewPager viewPager;
     private TextView number_tx;
     private ArrayList<String> urlList;
+    private TextView context_tx;
+    String context="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.datails_activity);
+
         initparm();
         initview();
     }
@@ -28,17 +31,23 @@ public class Datails extends AppCompatActivity {
     private void initparm() {
         Intent intent=getIntent();
         String  urls=  intent.getStringExtra("urls");
+         context=  intent.getStringExtra("context");
         String[] arr = urls.split(",");
+
         urlList=new ArrayList<>();
         Collections.addAll(urlList,arr);
     }
+
 
     private void initview() {
 
         viewPager =findViewById(R.id.DataIls_vp);
         number_tx =findViewById(R.id.DataIls_tx);
+        context_tx=findViewById(R.id.context);
         PhotoPagerAdapter photoPagerAdapter=new PhotoPagerAdapter(getSupportFragmentManager(),urlList);
         viewPager.setAdapter(photoPagerAdapter);
+
+        context_tx.setText(context);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {

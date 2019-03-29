@@ -58,7 +58,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
                     lateralAdapter.notifyDataSetChanged();
 
                         recyclerViewsetting();
-                    ToastUtils.show(getContext(),"刷新成功");
+
                 }
         }
     };
@@ -157,7 +157,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
      */
     @Override
     public void OnBannerClick(int position) {
-        ToastUtils.show(getContext(),"你点击了"+position);
+
     }
 
     @Override

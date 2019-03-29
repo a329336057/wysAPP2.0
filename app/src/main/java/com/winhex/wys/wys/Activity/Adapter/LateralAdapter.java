@@ -79,9 +79,10 @@ public class LateralAdapter extends RecyclerView.Adapter<LateralAdapter.ViewHold
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(context,"我被点击了"+viewHolder.getAdapterPosition());
+
                 Intent intent=new Intent(context, Datails.class);
                 intent.putExtra("urls",list.get(viewHolder.getAdapterPosition()).getImage());
+                intent.putExtra("context",list.get(viewHolder.getAdapterPosition()).getContent());
                 context.startActivity(intent);
 
 
