@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/articlename"
+        android:layout_marginBottom="10dp"
+        android:text="三月，醉一场青春的流年。慢步在三月的春"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+    android:id="@+id/mastergraph"
+
+    android:layout_width="match_parent"
+    android:layout_height="230dp" />
+    <TextView
+        android:id="@+id/describes"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="三月，醉一场青春的流年。慢步在三月的春光里，走走停停，看花开嫣然，看春雨绵绵，感"
+        android:textSize="13dp"
+        android:textColor="#A0A0A0"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

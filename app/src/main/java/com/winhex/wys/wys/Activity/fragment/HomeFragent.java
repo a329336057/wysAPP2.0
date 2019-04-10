@@ -19,6 +19,7 @@ import com.hjq.bar.TitleBar;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.winhex.wys.wys.Activity.Adapter.ArticlListAdapter;
 import com.winhex.wys.wys.Activity.Adapter.LateralAdapter;
 import com.winhex.wys.wys.Activity.Release.Publish;
 import com.winhex.wys.wys.Presenter.Home.HomePresenterImpl;
@@ -28,6 +29,7 @@ import com.winhex.wys.wys.Utils.SharedPreferencesUtil;
 import com.winhex.wys.wys.Utils.ToastUtils;
 import com.winhex.wys.wys.Utils.UrlIPconfig;
 import com.winhex.wys.wys.View.IHomeview;
+import com.winhex.wys.wys.bean.Articllistbean;
 import com.winhex.wys.wys.bean.Homebean;
 import com.winhex.wys.wys.bean.lateralBean;
 import com.youth.banner.Banner;
@@ -42,11 +44,15 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     SmartRefreshLayout msmartlayout;
     Banner mbanner;
     List<lateralBean> list_lateral=new ArrayList<>();
+    List<Articllistbean> list_articl=new ArrayList<>();
     NestedScrollView scrollView;
     TitleBar titleBar;
     RecyclerView MlateralrecyclerView;
+
+    RecyclerView MarticlrecyclerView;
     HomePresenterImpl homePresenter;
     LateralAdapter lateralAdapter;
+    ArticlListAdapter articlListAdapter;
 
     @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
@@ -56,9 +62,11 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
                     lateralAdapter=new LateralAdapter(list_lateral,getContext());
                     MlateralrecyclerView.setAdapter(lateralAdapter);
                     lateralAdapter.notifyDataSetChanged();
-
-                        recyclerViewsetting();
-
+                    lateralAdapter_recyclerViewsetting();
+                    articlListAdapter=new ArticlListAdapter(list_articl,getContext());
+                     MarticlrecyclerView.setAdapter(articlListAdapter);
+                    articlListAdapter.notifyDataSetChanged();
+                    setList_articl_recyclerViewsetting();
                 }
         }
     };
@@ -95,11 +103,18 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
     /**
      * 设置样式
      */
-    private void recyclerViewsetting() {
+    private void lateralAdapter_recyclerViewsetting() {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
        // MlateralrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.HORIZONTAL));//横线
         MlateralrecyclerView.setLayoutManager(linearLayoutManager);
+
+    }
+    private void setList_articl_recyclerViewsetting() {
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        // MlateralrecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.HORIZONTAL));//横线
+        MarticlrecyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -123,7 +138,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
      */
     private void findid(View v) {
         list_lateral=new ArrayList<>();
-
+        MarticlrecyclerView=v.findViewById(R.id.artilist);
         msmartlayout=v.findViewById(R.id.refreshLayout);
         MlateralrecyclerView=v.findViewById(R.id.lateral);
         titleBar=v.findViewById(R.id.hometitel);
@@ -195,6 +210,7 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
             if(homebean.getHomerow()!=null){
                 //发送messgae
                 list_lateral.clear();
+                list_articl.clear();
                 addbean(homebean);
                 Message message=new Message();
                 message.what=1;
@@ -211,14 +227,26 @@ public class HomeFragent extends Fragment implements OnBannerListener, OnTitleBa
      */
     void addbean(Homebean homebean){
         List<Homebean.HomerowBean> list=homebean.getHomerow();
+        List<Homebean.ArticllistBean> articllist=homebean.getArticllist();
         int a=3;
         for (int i = 0; i < list.size(); i++) {
+
             lateralBean lateralBean=new lateralBean();
             lateralBean.setContent(list.get(i).getContent());
             lateralBean.setImage(list.get(i).getImage());
             lateralBean.setHead_portrait(R.drawable.classify_1);
             list_lateral.add(lateralBean);
 
+        }
+        for (int i = 0; i < articllist.size(); i++) {
+            Articllistbean articllistbean=new Articllistbean();
+            articllistbean.setArticlename(articllist.get(i).getArticlename());
+            articllistbean.setDescribes(articllist.get(i).getDescribes());
+            articllistbean.setUrl(articllist.get(i).getUrl());
+            articllistbean.setAid(articllist.get(i).getAid());
+            articllistbean.setMastergraph(articllist.get(i).getMastergraph());
+            articllistbean.setCalssfiy(articllist.get(i).getCalssfiy());
+            list_articl.add(articllistbean);
         }
 
     }
